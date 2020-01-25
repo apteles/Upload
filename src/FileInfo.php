@@ -57,24 +57,41 @@ class FileInfo extends SplFileInfo implements FileInfoInterface
         return \preg_replace("/([^\w\s\d\-_~,;:\[\]\(\).]|[\.]{2,})/", "", $name);
     }
 
+    /**
+     *
+     * @param string $name
+     * @return FileInfoInterface
+     */
     public function setName(string $name): FileInfoInterface
     {
-        $name = \basename($this->sureThatNameBeSafe($name));
-        $this->name = $name;
+        $this->name = \basename($this->sureThatNameBeSafe($name));
 
         return $this;
     }
 
+    /**
+     *
+     * @return string
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     *
+     * @return string
+     */
     public function getExtension(): string
     {
         return $this->extension;
     }
 
+    /**
+     *
+     * @param string $extension
+     * @return FileInfoInterface
+     */
     public function setExtension(string $extension): FileInfoInterface
     {
         $this->extension = \strtolower($extension);
@@ -82,6 +99,10 @@ class FileInfo extends SplFileInfo implements FileInfoInterface
         return $this;
     }
 
+    /**
+     *
+     * @return string
+     */
     public function getNameWithExtension(): string
     {
         if (!$this->extension) {
@@ -90,6 +111,10 @@ class FileInfo extends SplFileInfo implements FileInfoInterface
         return \sprintf('%s.%s', $this->name, $this->extension);
     }
 
+    /**
+     *
+     * @return string
+     */
     public function getMimetype(): string
     {
         if (!$this->mimeType) {
@@ -101,18 +126,31 @@ class FileInfo extends SplFileInfo implements FileInfoInterface
 
         return $this->mimeType;
     }
-
+    
+    /**
+     *
+     * @return string
+     */
     public function getMd5(): string
     {
         return \md5_file($this->getPathname());
     }
 
+    /**
+     * This function support algorithms like sha1,sha256, md5 etc.
+     * @param string $algo
+     * @return string
+     */
     public function getHash($algo = 'md5'): string
     {
         return \hash_file($algo, $this->getPathname());
     }
 
-    public function getDimensions()
+    /**
+     *
+     * @return array
+     */
+    public function getDimensions(): array
     {
         [$width, $height] = \getimagesize($this->getPathname());
 
@@ -122,7 +160,11 @@ class FileInfo extends SplFileInfo implements FileInfoInterface
         ];
     }
 
-    public function isUploadedFile()
+    /**
+     *
+     * @return boolean
+     */
+    public function isUploadedFile(): bool
     {
         return \is_uploaded_file($this->getPathname());
     }
