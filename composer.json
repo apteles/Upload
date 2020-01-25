@@ -1,0 +1,30 @@
+{
+    "name": "andre/upload",
+    "description": "Component to upload file",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andre Teles",
+            "email": "andre.telestp@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Apteles\\Upload\\": "src"
+        }
+    },
+    "require": {
+        "php": "^7.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5",
+        "spatie/phpunit-watcher": "^1.21",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpstan/phpstan": "^0.12.3"
+    },
+    "scripts": {
+        "test": "phpunit tests --testdox",
+        "test:watch": "phpunit-watcher watch"
+    }
+}
